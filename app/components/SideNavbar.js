@@ -9,21 +9,21 @@ const SideNavbar = () => {
           <li className="px-4 py-2 ">
             <Link
               href={"/dashboard"}
-              className="hover:text-rose-600 font-semibold"
+              className="hover:text-[#4295ea] font-semibold"
             >
               Dashboard
             </Link>
           </li>
 
           <li className="px-4 ">
-            <Link className="hover:text-rose-600 font-semibold" href={"/parts"}>
+            <Link className="hover:text-[#4295ea] font-semibold" href={"/parts"}>
               Parts
             </Link>
             <ul className="px-2">
               <li>
                 <Link
                   href={"/parts/add"}
-                  className="hover:text-rose-600 text-sm"
+                  className="hover:text-[#4295ea] text-sm"
                 >
                   Add Part
                 </Link>
@@ -31,7 +31,7 @@ const SideNavbar = () => {
               <li>
                 <Link
                   href={"/parts/edit"}
-                  className="hover:text-rose-600 text-sm"
+                  className="hover:text-[#4295ea] text-sm"
                 >
                   Edit Part
                 </Link>

@@ -8,12 +8,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  let user = true
   return (
     <html lang="en">
-      <body className="bg-slate-50">
+      <body className="">
         <Header />
         <div className="flex">
-          {/* <SideNavbar /> */}
+          <SideNavbar />
           <div className="flex-grow p-4 h-[96vh]">{children}</div>
         </div>
       </body>

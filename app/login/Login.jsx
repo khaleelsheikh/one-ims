@@ -1,24 +1,25 @@
-"use client";
+// Login.js
+
 import React from "react";
 
 const Login = () => {
   return (
-    <>
-      <div class="">
-        <div class="bg-white my-4 rounded-xl sm:px-6 px-4 py-8 max-w-md w-full h-max shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] max-lg:mx-auto">
+    <div className="flex justify-center items-center mt-4">
+      
+        <div className="bg-white my-4 rounded-xl sm:px-6 px-4 py-8 max-w-md w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
           <form>
-            <div class="mb-10">
-              <h3 class="text-3xl font-extrabold">Log in</h3>
+            <div className="mb-10">
+              <h3 className="text-3xl font-extrabold">Log in</h3>
             </div>
 
             <div>
-              <label class="text-sm mb-2 block">User name</label>
-              <div class="relative flex items-center">
+              <label className="text-sm mb-2 block">User name</label>
+              <div className="relative flex items-center">
                 <input
                   name="username"
                   type="text"
                   required
-                  class="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                   placeholder="Enter user name"
                   autoComplete="off"
                 />
@@ -26,10 +27,15 @@ const Login = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#bbb"
                   stroke="#bbb"
-                  class="w-[18px] h-[18px] absolute right-4"
+                  className="w-[18px] h-[18px] absolute right-4"
                   viewBox="0 0 24 24"
                 >
-                  <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                  <circle
+                    cx="10"
+                    cy="7"
+                    r="6"
+                    data-original="#000000"
+                  ></circle>
                   <path
                     d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
                     data-original="#000000"
@@ -37,14 +43,14 @@ const Login = () => {
                 </svg>
               </div>
             </div>
-            <div class="mt-6">
-              <label class="text-sm mb-2 block">Password</label>
-              <div class="relative flex items-center">
+            <div className="mt-6">
+              <label className="text-sm mb-2 block">Password</label>
+              <div className="relative flex items-center">
                 <input
                   name="password"
                   type="password"
                   required
-                  class="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                   placeholder="Enter password"
                   autoComplete="off"
                 />
@@ -52,7 +58,7 @@ const Login = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#bbb"
                   stroke="#bbb"
-                  class="w-[18px] h-[18px] absolute right-4 cursor-pointer"
+                  className="w-[18px] h-[18px] absolute right-4 cursor-pointer"
                   viewBox="0 0 128 128"
                 >
                   <path
@@ -63,18 +69,18 @@ const Login = () => {
               </div>
             </div>
 
-            <div class="mt-10">
+            <div className="mt-10">
               <button
                 type="button"
-                class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#70afef] hover:bg-[#4295ea] focus:outline-none"
               >
                 Log in
               </button>
             </div>
           </form>
         </div>
-      </div>
-    </>
+      
+    </div>
   );
 };
 

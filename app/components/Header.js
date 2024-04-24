@@ -14,7 +14,7 @@ const Header = () => {
           <div className="flex place-content-end">
             <ul className="flex flex-row gap-4 items-center">
               <li>
-                <Link href={"/login"} className="hover:text-rose-600">
+                <Link href={"/login"} className="hover:text-[#4295ea]">
                   Login
                 </Link>
               </li>
