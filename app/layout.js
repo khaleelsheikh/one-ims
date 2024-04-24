@@ -1,6 +1,6 @@
 import "./globals.css";
 import Header from "./components/Header";
-import Navbar from "./components/Navbar";
+import SideNavbar from "./components/SideNavbar";
 
 export const metadata = {
   title: "ONE - IMS",
@@ -10,10 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="">
+      <body className="bg-slate-50">
         <Header />
-        <Navbar/>
-        {children}
+        <div className="flex">
+          {/* <SideNavbar /> */}
+          <div className="flex-grow p-4 h-[96vh]">{children}</div>
+        </div>
       </body>
     </html>
   );
