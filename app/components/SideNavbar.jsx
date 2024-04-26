@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import React from "react";
 
@@ -34,6 +35,30 @@ const SideNavbar = () => {
                   className="hover:text-[#4295ea] text-sm"
                 >
                   Edit Part
+                </Link>
+              </li>
+            </ul>
+          </li>
+
+          <li className="px-4 ">
+            <Link className="hover:text-[#4295ea] font-semibold" href={"/users"}>
+              Users
+            </Link>
+            <ul className="px-2">
+              <li>
+                <Link
+                  href={"/users/add"}
+                  className="hover:text-[#4295ea] text-sm"
+                >
+                  Add User
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={"/users/edit"}
+                  className="hover:text-[#4295ea] text-sm"
+                >
+                  Edit User
                 </Link>
               </li>
             </ul>
