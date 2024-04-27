@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Define the User model with fields for user details
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  username String?
+  password String // In a real application, you'd likely hash and salt the password
+  role     Role    @default(SALES_REP) // Default role is USER
+}
+
+// Define an enum for user roles
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  ACCOUNTANT
+  SALES_REP
+}
+
+// Define a model to store role-based permissions
+model RolePermission {
+  id        Int       @id @default(autoincrement())
+  role      Role
+  canAccess AppPart[] // Array of parts of the app that the role can access
+  canModify AppPart[] // Array of parts of the app that the role can modify
+}
+
+enum AppPart {
+  SETTINGS
+  PRODUCT_DETAILS
+  PRODUCT_COST_PRICE
+  ADMIN_PANEL
+}
