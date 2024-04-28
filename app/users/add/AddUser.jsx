@@ -2,8 +2,41 @@
 
 import SideNavbar from "@/app/components/SideNavbar";
 import React from "react";
+import { useState } from "react";
 
 const AddUser = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCPassword] = useState("");
+  const [role, setRole] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Send a POST request to create a new user
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password, role }),
+      });
+
+      // Handle response
+      if (response.ok) {
+        // User created successfully
+        console.log("User created successfully");
+      } else {
+        // Error creating user
+        console.error("Error creating user:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  };
+
   return (
     <>
       <div className="flex">
@@ -11,7 +44,7 @@ const AddUser = () => {
         <div className="flex-grow p-4 h-[96vh]">
           <div className="flex justify-center items-center mt-4">
             <div className="bg-white my-4 rounded-xl sm:px-6 px-4 py-8 max-w-md w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-10">
                   <h3 className="text-3xl font-extrabold">Add New User</h3>
                 </div>
@@ -28,6 +61,8 @@ const AddUser = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter user name"
                       autoComplete="off"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +98,8 @@ const AddUser = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter user name"
                       autoComplete="off"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -95,6 +132,8 @@ const AddUser = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter password"
                       autoComplete="off"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -115,12 +154,14 @@ const AddUser = () => {
                   <label className="text-sm mb-2 block">Confirm Password</label>
                   <div className="relative flex items-center">
                     <input
-                      name="password"
+                      name="cpassword"
                       type="password"
                       required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter password"
                       autoComplete="off"
+                      value={cpassword}
+                      onChange={(e) => setCPassword(e.target.value)}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +191,7 @@ const AddUser = () => {
 
                 <div className="mt-10">
                   <button
-                    type="button"
+                    type="submit"
                     className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#70afef] hover:bg-[#4295ea] focus:outline-none"
                   >
                     Add User
