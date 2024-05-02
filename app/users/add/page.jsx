@@ -150,16 +150,22 @@ const AddUserPage = () => {
                   </div>
                 </div>
 
-                {/* <div className="mt-6">
-                  <label className="text-sm mb-2 block" htmlFor="role">User Role</label>
+                <div className="mt-6">
+                  <label className="text-sm mb-2 block" htmlFor="role">
+                    User Role
+                  </label>
                   <div className="relative flex items-center">
-                    <select className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]">
-                      <option>Administrator</option>
-                      <option>Accountant</option>
-                      <option>Sales Rep</option>
+                    <select
+                      className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
+                      name="role"
+                      id="role"
+                    >
+                      <option value="administrator">Administrator</option>
+                      <option value="accountant">Accountant</option>
+                      <option value="salesman">Sales Rep</option>
                     </select>
                   </div>
-                </div> */}
+                </div>
 
                 <div className="mt-10">
                   <button
