@@ -159,10 +159,14 @@ const AddUserPage = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       name="role"
                       id="role"
+                      defaultValue={0}
                     >
-                      <option value="administrator">Administrator</option>
-                      <option value="accountant">Accountant</option>
-                      <option value="salesman">Sales Rep</option>
+                      <option value={0} disabled>
+                        --Select one--
+                      </option>
+                      <option value={1}>Administrator</option>
+                      <option value={2}>Accountant</option>
+                      <option value={3}>Sales Rep</option>
                     </select>
                   </div>
                 </div>
