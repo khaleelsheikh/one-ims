@@ -5,38 +5,6 @@ import React from "react";
 import { useState } from "react";
 
 const AddUser = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [cpassword, setCPassword] = useState("");
-  const [role, setRole] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // Send a POST request to create a new user
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password, role }),
-      });
-
-      // Handle response
-      if (response.ok) {
-        // User created successfully
-        console.log("User created successfully");
-      } else {
-        // Error creating user
-        console.error("Error creating user:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error creating user:", error);
-    }
-  };
-
   return (
     <>
       <div className="flex">
@@ -44,23 +12,23 @@ const AddUser = () => {
         <div className="flex-grow p-4 h-[96vh]">
           <div className="flex justify-center items-center mt-4">
             <div className="bg-white my-4 rounded-xl sm:px-6 px-4 py-8 max-w-md w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <form>
+              <form onSubmit={"/"}>
                 <div className="mb-10">
                   <h3 className="text-3xl font-extrabold">Add New User</h3>
                 </div>
 
                 <div>
-                  <label className="text-sm mb-2 block" htmlFor="username">
-                    Username
+                  <label className="text-sm mb-2 block" htmlFor="userId">
+                    User Id
                   </label>
                   <div className="relative flex items-center">
                     <input
-                      name="username"
-                      id="username"
+                      name="userId"
+                      id="userId"
                       type="text"
                       required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
-                      placeholder="Enter username"
+                      placeholder="Enter user id"
                       autoComplete="off"
                     />
                     <svg
@@ -186,21 +154,21 @@ const AddUser = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       name="role"
                       id="role"
-                      defaultValue={0}
+                      defaultValue={"select one"}
                     >
-                      <option value={0} disabled>
+                      <option value={"select one"} disabled>
                         --Select one--
                       </option>
-                      <option value={1}>Administrator</option>
-                      <option value={2}>Accountant</option>
-                      <option value={3}>Sales Rep</option>
+                      <option value={"administrator"}>Administrator</option>
+                      <option value={"accountant"}>Accountant</option>
+                      <option value={"salesman"}>Sales Rep</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="mt-10">
                   <button
-                    formAction={"/"}
+                    type="submit"
                     className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#70afef] hover:bg-[#4295ea] focus:outline-none"
                   >
                     Add User
