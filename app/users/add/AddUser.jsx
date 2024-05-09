@@ -154,7 +154,7 @@ const AddUser = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       name="role"
                       id="role"
-                      defaultValue={"select one"}
+                      defaultValue={"salesman"}
                     >
                       <option value={"select one"} disabled>
                         --Select one--
