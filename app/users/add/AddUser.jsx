@@ -1,8 +1,8 @@
 "use client";
 
 import SideNavbar from "@/app/components/SideNavbar";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { toast } from "sonner";
 
 const AddUser = () => {
   return (
@@ -16,7 +16,6 @@ const AddUser = () => {
                 <div className="mb-10">
                   <h3 className="text-3xl font-extrabold">Add New User</h3>
                 </div>
-
                 <div>
                   <label className="text-sm mb-2 block" htmlFor="userId">
                     User Id
@@ -53,17 +52,17 @@ const AddUser = () => {
                 </div>
 
                 <div className="mt-6">
-                  <label className="text-sm mb-2 block" htmlFor="email">
-                    Email address:
+                  <label className="text-sm mb-2 block" htmlFor="name">
+                    Full Name
                   </label>
                   <div className="relative flex items-center">
                     <input
-                      name="email"
+                      name="name"
                       type="text"
-                      id="email"
+                      id="name"
                       required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
-                      placeholder="Enter email"
+                      placeholder="Enter name"
                       autoComplete="off"
                     />
                     <svg
@@ -154,14 +153,14 @@ const AddUser = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       name="role"
                       id="role"
-                      defaultValue={"salesman"}
+                      defaultValue={"select_one"}
                     >
-                      <option value={"select one"} disabled>
+                      <option value={"select_one"} disabled>
                         --Select one--
                       </option>
-                      <option value={"administrator"}>Administrator</option>
-                      <option value={"accountant"}>Accountant</option>
-                      <option value={"salesman"}>Sales Rep</option>
+                      <option value={"ADMIN"}>Administrator</option>
+                      <option value={"ACCOUNTANT"}>Accountant</option>
+                      <option value={"SALESMAN"}>Sales Rep</option>
                     </select>
                   </div>
                 </div>

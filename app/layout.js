@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import "./globals.css";
-
-
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "ONE - IMS",
@@ -13,6 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="">
+        <Toaster richColors position="top-center" />
         <Header />
         {children}
       </body>
