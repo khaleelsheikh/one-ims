@@ -1,34 +1,34 @@
 import { db } from "@/app/lib/db";
-import { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { userId, name, password, role } = body;
+    const { id, fullName, password, role } = body;
 
-    //check if the user already exists
+    // Check if the user already exists
 
     const existingUserById = await db.user.findUnique({
-      where: { userId: userId },
+      where: { id: id },
     });
 
     if (existingUserById) {
       return new NextResponse.json(
-        { user: null, message: `User with ${userId} already exists` },
+        { user: null, message: `User with id ${id} already exists` },
         { status: 409 }
       );
     }
 
-    const hashedPassword = await hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await db.user.create({
-      data: { userId, name, password: hashedPassword, role },
+      data: { id, fullName, password: hashedPassword, role },
     });
     return NextResponse.json(
       {
         newUser,
-        message: `New user created successfully with user id ${userId}`,
+        message: `New user created successfully with user id ${id}`,
       },
       { status: 201 }
     );
@@ -37,3 +37,7 @@ export async function POST(req) {
     return NextResponse.json({ message: "Error in creating user" });
   }
 }
+
+// export async function GET() {
+//   return NextResponse.json({ message: "YES" });
+// }
