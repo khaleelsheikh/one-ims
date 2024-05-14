@@ -5,6 +5,80 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 
 const AddUser = () => {
+  const [formData, setFormData] = useState({
+    id: "",
+    fullName: "",
+    password: "",
+    cpassword: "",
+    role: "select_one", // assuming default value for role
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Basic validation checks
+      if (formData.id === "") {
+        toast.error("Please enter User Id");
+        return;
+      }
+
+      if (formData.fullName === "") {
+        toast.error("Please enter Full Name");
+        return;
+      }
+
+      if (formData.password === "") {
+        toast.error("Please enter Password");
+        return;
+      }
+
+      if (formData.cpassword === "") {
+        toast.error("Please confirm Password");
+        return;
+      }
+
+      if (formData.password !== formData.cpassword) {
+        toast.error("Passwords do not match");
+        return;
+      }
+
+      if (formData.role === "select_one") {
+        toast.error("Please select User Role");
+        return;
+      }
+
+      // Call the addUser function to submit the form data to the database
+      const response = await addUser(formData);
+
+      // Handle success response
+      if (response.user) {
+        toast.success(response.message);
+        // Optionally, you can reset the form after successful submission
+        setFormData({
+          id: "",
+          fullName: "",
+          password: "",
+          cpassword: "",
+          role: "select_one",
+        });
+      } else {
+        // Handle error response
+        toast.error(response.message);
+      }
+    } catch (error) {
+      console.error("Error in form submission:", error);
+      toast.error("Error in form submission");
+    }
+  };
+
   return (
     <>
       <div className="flex">
@@ -12,23 +86,25 @@ const AddUser = () => {
         <div className="flex-grow p-4 h-[96vh]">
           <div className="flex justify-center items-center mt-4">
             <div className="bg-white my-4 rounded-xl sm:px-6 px-4 py-8 max-w-md w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <form onSubmit={"/"}>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-10">
                   <h3 className="text-3xl font-extrabold">Add New User</h3>
                 </div>
                 <div>
-                  <label className="text-sm mb-2 block" htmlFor="userId">
+                  <label className="text-sm mb-2 block" htmlFor="id">
                     User Id
                   </label>
                   <div className="relative flex items-center">
                     <input
-                      name="userId"
-                      id="userId"
-                      type="text"
-                      required
+                      name="id"
+                      id="id"
+                      type="number"
+                      // required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter user id"
                       autoComplete="off"
+                      value={formData.id}
+                      onChange={handleChange}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -52,18 +128,20 @@ const AddUser = () => {
                 </div>
 
                 <div className="mt-6">
-                  <label className="text-sm mb-2 block" htmlFor="name">
+                  <label className="text-sm mb-2 block" htmlFor="fullName">
                     Full Name
                   </label>
                   <div className="relative flex items-center">
                     <input
-                      name="name"
+                      name="fullName"
                       type="text"
-                      id="name"
-                      required
+                      id="fullName"
+                      // required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
-                      placeholder="Enter name"
+                      placeholder="Enter full name"
                       autoComplete="off"
+                      value={formData.fullName}
+                      onChange={handleChange}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -95,10 +173,12 @@ const AddUser = () => {
                       name="password"
                       id="password"
                       type="password"
-                      required
+                      // required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter password"
                       autoComplete="off"
+                      value={formData.password}
+                      onChange={handleChange}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -124,10 +204,12 @@ const AddUser = () => {
                       name="cpassword"
                       id="cpassword"
                       type="password"
-                      required
+                      // required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Confirm password"
                       autoComplete="off"
+                      value={formData.cpassword}
+                      onChange={handleChange}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -154,6 +236,7 @@ const AddUser = () => {
                       name="role"
                       id="role"
                       defaultValue={"select_one"}
+                      onChange={handleChange}
                     >
                       <option value={"select_one"} disabled>
                         --Select one--

@@ -14,7 +14,7 @@ export async function POST(req) {
     });
 
     if (existingUserById) {
-      return new NextResponse.json(
+      return NextResponse.json(
         { user: null, message: `User with id ${id} already exists` },
         { status: 409 }
       );
@@ -25,10 +25,13 @@ export async function POST(req) {
     const newUser = await db.user.create({
       data: { id, fullName, password: hashedPassword, role },
     });
+
+    const { password: newPassword, ...rest } = newUser;
+
     return NextResponse.json(
       {
-        newUser,
-        message: `New user created successfully with user id ${id}`,
+        user: rest,
+        message: `New user ${fullName} was created successfully with user id ${id} as ${role}`,
       },
       { status: 201 }
     );

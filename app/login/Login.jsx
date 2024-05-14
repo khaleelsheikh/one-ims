@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import SideNavbar from "../components/SideNavbar";
+// import SideNavbar from "../components/SideNavbar";
 
 const Login = () => {
   return (
     <>
       <div className="flex">
-        <SideNavbar />
+        {/* <SideNavbar /> */}
         <div className="flex-grow p-4 h-[96vh]">
           <div className="flex justify-center items-center mt-4">
             <div className="bg-white my-4 rounded-xl sm:px-6 px-4 py-8 max-w-md w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
@@ -16,14 +16,14 @@ const Login = () => {
                 </div>
 
                 <div>
-                  <label className="text-sm mb-2 block">User name</label>
+                  <label className="text-sm mb-2 block">User Id</label>
                   <div className="relative flex items-center">
                     <input
                       name="username"
                       type="text"
                       required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
-                      placeholder="Enter user name"
+                      placeholder="Enter user id"
                       autoComplete="off"
                     />
                     <svg
