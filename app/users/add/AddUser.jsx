@@ -1,6 +1,7 @@
 "use client";
 
 import SideNavbar from "@/app/components/SideNavbar";
+import { addUser } from "@/app/services/userService";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
@@ -15,10 +16,19 @@ const AddUser = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    // If the input name is "id", only allow numerical input
+    if (name === "id" && !isNaN(value)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else if (name !== "id") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -60,6 +70,7 @@ const AddUser = () => {
 
       // Handle success response
       if (response.user) {
+        console.log(response);
         toast.success(response.message);
         // Optionally, you can reset the form after successful submission
         setFormData({
@@ -98,11 +109,13 @@ const AddUser = () => {
                     <input
                       name="id"
                       id="id"
-                      type="number"
+                      type="text"
                       // required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter user id"
                       autoComplete="off"
+                      // pattern="[0-9]*" // Only allow numerical input in modern browsers
+                      // inputMode="numeric" // Show numeric keyboard on mobile devices
                       value={formData.id}
                       onChange={handleChange}
                     />

@@ -10,7 +10,7 @@ export async function POST(req) {
     // Check if the user already exists
 
     const existingUserById = await db.user.findUnique({
-      where: { id: id },
+      where: { id: Number(id) },
     });
 
     if (existingUserById) {
@@ -23,7 +23,7 @@ export async function POST(req) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await db.user.create({
-      data: { id, fullName, password: hashedPassword, role },
+      data: { id: parseInt(id), fullName, password: hashedPassword, role },
     });
 
     const { password: newPassword, ...rest } = newUser;
