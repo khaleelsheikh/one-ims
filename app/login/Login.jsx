@@ -16,12 +16,15 @@ const Login = () => {
                 </div>
 
                 <div>
-                  <label className="text-sm mb-2 block">User Id</label>
+                  <label className="text-sm mb-2 block" htmlFor="userId">
+                    User Id
+                  </label>
                   <div className="relative flex items-center">
                     <input
-                      name="username"
+                      name="userId"
+                      id="userId"
                       type="text"
-                      required
+                      // required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter user id"
                       autoComplete="off"
@@ -47,10 +50,13 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="mt-6">
-                  <label className="text-sm mb-2 block">Password</label>
+                  <label className="text-sm mb-2 block" htmlFor="password">
+                    Password
+                  </label>
                   <div className="relative flex items-center">
                     <input
                       name="password"
+                      id="password"
                       type="password"
                       required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
@@ -74,7 +80,7 @@ const Login = () => {
 
                 <div className="mt-10">
                   <button
-                    type="button"
+                    type="submit"
                     className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-[#70afef] hover:bg-[#4295ea] focus:outline-none"
                   >
                     Log in
