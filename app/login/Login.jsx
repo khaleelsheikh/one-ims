@@ -1,8 +1,46 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { supabase } from "../lib/supabase";
+import { NextResponse } from "next/server";
 // import SideNavbar from "../components/SideNavbar";
 
 const Login = () => {
+  const [formData, setFormData] = useState({ id: "", password: "" });
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { user, session, error } = await supabase.auth.signInWithPassword({
+        email: formData.id, // Supabase uses email for sign-in, so treat userId as email here
+        password: formData.password,
+      });
+
+      if (error) {
+        console.log(error);
+        return NextResponse.json(error);
+      }
+
+      const token = session.access_token;
+
+      // Store token in cookies
+      document.cookie = `token=${token}; path=/;`;
+
+      toast.success("Login successful");
+      router.push("/dashboard"); // Redirect to the dashboard or desired page
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Login failed: " + error.message);
+    }
+  };
+
   return (
     <>
       <div className="flex">
@@ -10,24 +48,26 @@ const Login = () => {
         <div className="flex-grow p-4 h-[96vh]">
           <div className="flex justify-center items-center mt-4">
             <div className="bg-white my-4 rounded-xl sm:px-6 px-4 py-8 max-w-md w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-10">
                   <h3 className="text-3xl font-extrabold">Log in</h3>
                 </div>
 
                 <div>
-                  <label className="text-sm mb-2 block" htmlFor="userId">
+                  <label className="text-sm mb-2 block" htmlFor="id">
                     User Id
                   </label>
                   <div className="relative flex items-center">
                     <input
-                      name="userId"
-                      id="userId"
+                      name="id"
+                      id="id"
                       type="text"
                       // required
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter user id"
                       autoComplete="off"
+                      value={formData.id}
+                      onChange={handleChange}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -62,6 +102,8 @@ const Login = () => {
                       className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#4295ea]"
                       placeholder="Enter password"
                       autoComplete="off"
+                      value={formData.password}
+                      onChange={handleChange}
                     />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
