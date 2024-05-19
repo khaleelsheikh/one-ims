@@ -1,44 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { supabase } from "../lib/supabase";
-import { NextResponse } from "next/server";
 // import SideNavbar from "../components/SideNavbar";
 
 const Login = () => {
   const [formData, setFormData] = useState({ id: "", password: "" });
-  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { user, session, error } = await supabase.auth.signInWithPassword({
-        email: formData.id, // Supabase uses email for sign-in, so treat userId as email here
-        password: formData.password,
-      });
-
-      if (error) {
-        console.log(error);
-        return NextResponse.json(error);
-      }
-
-      const token = session.access_token;
-
-      // Store token in cookies
-      document.cookie = `token=${token}; path=/;`;
-
-      toast.success("Login successful");
-      router.push("/dashboard"); // Redirect to the dashboard or desired page
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("Login failed: " + error.message);
-    }
   };
 
   return (
