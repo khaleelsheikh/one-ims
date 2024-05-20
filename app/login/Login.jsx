@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { toast } from "sonner";
+import supabase from "../lib/supabase";
 // import SideNavbar from "../components/SideNavbar";
 
 const Login = () => {
@@ -9,6 +10,27 @@ const Login = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { user, session, error } = await supabase.auth.signInWithPassword({
+        email: formData.id,
+        password: formData.password,
+      });
+
+      if (error) {
+        console.log(error.message);
+        toast.error(error.message);
+      } else {
+        localStorage.setItem("supabase.auth.token", session.access_token);
+        toast.success("Logged in successfully");
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      toast.error("An error occurred");
+    }
   };
 
   return (
