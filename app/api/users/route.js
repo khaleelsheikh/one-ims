@@ -1,11 +1,11 @@
 import { db } from "@/app/lib/db";
 import bcrypt from "bcrypt";
+import supabase from "@/app/lib/supabase";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { id, fullName, password, role } = body;
+    const { id, fullName, email, password, role } = await req.json();
 
     // Check if the user already exists
 
@@ -15,7 +15,7 @@ export async function POST(req) {
 
     if (existingUserById) {
       return NextResponse.json(
-        { user: null, message: `User with id ${id} already exists` },
+        { message: `User with id ${id} already exists` },
         { status: 409 }
       );
     }
@@ -23,7 +23,7 @@ export async function POST(req) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await db.user.create({
-      data: { id: parseInt(id), fullName, password: hashedPassword, role },
+      data: { id: parseInt(id), fullName, email, password: hashedPassword, role },
     });
 
     const { password: newPassword, ...rest } = newUser;

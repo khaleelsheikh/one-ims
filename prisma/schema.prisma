@@ -16,9 +16,10 @@ datasource db {
 
 // Define the user model
 model User {
-  id        Int      @id @unique
+  id        Int      @id @unique @default(autoincrement())
   fullName  String?
   password  String
+  email     String   @unique
   role      UserRole @default(SALESMAN)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
